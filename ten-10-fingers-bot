@@ -1,0 +1,33 @@
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+import time
+chrome_driver_path = 'YOUR CHROME DRIVER PATH'
+driver = webdriver.Chrome(chrome_driver_path)
+
+url = 'https://accounts.google.com/o/oauth2/auth/identifier?response_type=code&access_type=offline&client_id=451050238842-stelcbipu0o33seaasv3sd3gt8ktilti.apps.googleusercontent.com&redirect_uri=https%3A%2F%2F10fastfingers.com%2Faccount%2Fgoogle_oauth2callback&state&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&approval_prompt=auto&flowName=GeneralOAuthFlow'
+driver.get(url)
+
+input_area = driver.find_element_by_xpath("//*[@id='identifierId']")
+input_area.send_keys("yourgmail@gmail.com")
+
+button = driver.find_element_by_xpath("//*[@id='identifierNext']/div/button/span")
+button.click()
+
+time.sleep(1)
+
+password = driver.find_element_by_name("password")
+password.send_keys("YOUR PASSWORD")
+
+button = driver.find_element_by_xpath("//*[@id='passwordNext']/div/button/span")
+button.click()
+time.sleep(1)
+denny_button = driver.find_element_by_xpath("//*[@id='CybotCookiebotDialogBodyButtonDecline']")
+denny_button.click()
+
+i = 1
+input_area = driver.find_element_by_xpath("//*[@id='inputfield']")
+while i < 200:
+    word = driver.find_element_by_xpath("//*[@id='row1']/span["+str(i)+"]")
+    i +=1
+    input_area.send_keys(word.text +" ")
+    time.sleep(0.4)
